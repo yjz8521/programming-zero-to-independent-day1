@@ -16,4 +16,4 @@ py -m http.server 8000
 
 將這個 `share` 資料夾的內容整個上傳到任何靜態網站主機即可，例如 Netlify Drop 或 GitHub Pages。上傳根目錄必須直接包含 `index.html`、`styles.css` 與 `app.js`；不要把上層的完整 Repository 一起公開，因為完整 Repository 內有分階段解答。
 
-作答進度只保存於每位訪客自己的瀏覽器 `localStorage`，不會上傳到伺服器。這一版是 Day 1 示範課堂，不是完整 26 週課程入口。
+作答進度只保存於每位訪客自己的瀏覽器 `localStorage`，不會上傳到伺服器。檢查小測驗後，每一題會標示你的選項與正確答案；Output 題則會指出錯誤方向，並提供「查看正確 output」按鈕。這一版是 Day 1 示範課堂，不是完整 26 週課程入口。

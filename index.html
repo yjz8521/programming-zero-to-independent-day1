@@ -147,6 +147,14 @@ print("Zero to Independent")</code></pre>
               <textarea id="outputAnswer" rows="5" spellcheck="false" placeholder="在這裡先寫預期結果……"></textarea>
               <div class="answer-row"><button id="checkOutput" class="button button-secondary" type="button">檢查 output</button><button id="outputHint" class="text-button" type="button">Level 1 方向</button></div>
               <p id="outputFeedback" class="feedback" role="status" aria-live="polite"></p>
+              <button id="showOutputAnswer" class="text-button answer-reveal" type="button" hidden>查看正確 output</button>
+              <div id="outputAnswerReview" class="answer-review" hidden>
+                <strong>正確 output</strong>
+                <pre>Python
+
+Zero to Independent</pre>
+                <p>注意：<code># 這一行不產生 output</code> 是 comment，不會出現在畫面；中間的空白行來自 <code>print()</code>。</p>
+              </div>
             </div>
 
             <div class="callout callout-cool"><strong>小提醒</strong><span>如果你需要按很多次「檢查」，那不是失敗；請觀察每次回饋，記下你改變了什麼。</span></div>
@@ -159,11 +167,11 @@ print("Zero to Independent")</code></pre>
             <p class="lead">這不是正式週考。請先自己作答，再按檢查；分數只是訊號，錯題才是下一個學習方向。</p>
 
             <form id="quizForm" class="quiz-form">
-              <fieldset class="quiz-question"><legend>1. `month01` 最接近哪一種東西？</legend><label><input type="radio" name="q1" value="file" /> File</label><label><input type="radio" name="q1" value="folder" /> Folder / Directory</label><label><input type="radio" name="q1" value="program" /> Program</label></fieldset>
-              <fieldset class="quiz-question"><legend>2. 哪一個是交給 Shell 的 command？</legend><label><input type="radio" name="q2" value="day01" /> `day01.md`</label><label><input type="radio" name="q2" value="py" /> `py hello.py`</label><label><input type="radio" name="q2" value="month" /> `month01`</label></fieldset>
-              <fieldset class="quiz-question"><legend>3. 下列哪一行不會產生一般 output？</legend><label><input type="radio" name="q3" value="print" /> `print("Hello")`</label><label><input type="radio" name="q3" value="comment" /> `# print("Hello")`</label><label><input type="radio" name="q3" value="blank" /> `print()`</label></fieldset>
-              <fieldset class="quiz-question"><legend>4. `print()` 最接近什麼行為？</legend><label><input type="radio" name="q4" value="show" /> 把內容顯示在 output</label><label><input type="radio" name="q4" value="save" /> 把內容保存成 file</label><label><input type="radio" name="q4" value="move" /> 把資料夾移動到別處</label></fieldset>
-              <fieldset class="quiz-question"><legend>5. 遇到不懂的題目，預設先做什麼？</legend><label><input type="radio" name="q5" value="answer" /> 立刻要求完整答案</label><label><input type="radio" name="q5" value="try" /> 先獨立分析與嘗試 20 分鐘</label><label><input type="radio" name="q5" value="skip" /> 直接跳到下一週</label></fieldset>
+              <fieldset class="quiz-question" data-question="q1"><legend>1. `month01` 最接近哪一種東西？</legend><label><input type="radio" name="q1" value="file" /> File</label><label><input type="radio" name="q1" value="folder" /> Folder / Directory</label><label><input type="radio" name="q1" value="program" /> Program</label><p class="question-feedback" data-question-feedback="q1" role="status" aria-live="polite"></p></fieldset>
+              <fieldset class="quiz-question" data-question="q2"><legend>2. 哪一個是交給 Shell 的 command？</legend><label><input type="radio" name="q2" value="day01" /> `day01.md`</label><label><input type="radio" name="q2" value="py" /> `py hello.py`</label><label><input type="radio" name="q2" value="month" /> `month01`</label><p class="question-feedback" data-question-feedback="q2" role="status" aria-live="polite"></p></fieldset>
+              <fieldset class="quiz-question" data-question="q3"><legend>3. 下列哪一行不會產生一般 output？</legend><label><input type="radio" name="q3" value="print" /> `print("Hello")`</label><label><input type="radio" name="q3" value="comment" /> `# print("Hello")`</label><label><input type="radio" name="q3" value="blank" /> `print()`</label><p class="question-feedback" data-question-feedback="q3" role="status" aria-live="polite"></p></fieldset>
+              <fieldset class="quiz-question" data-question="q4"><legend>4. `print()` 最接近什麼行為？</legend><label><input type="radio" name="q4" value="show" /> 把內容顯示在 output</label><label><input type="radio" name="q4" value="save" /> 把內容保存成 file</label><label><input type="radio" name="q4" value="move" /> 把資料夾移動到別處</label><p class="question-feedback" data-question-feedback="q4" role="status" aria-live="polite"></p></fieldset>
+              <fieldset class="quiz-question" data-question="q5"><legend>5. 遇到不懂的題目，預設先做什麼？</legend><label><input type="radio" name="q5" value="answer" /> 立刻要求完整答案</label><label><input type="radio" name="q5" value="try" /> 先獨立分析與嘗試 20 分鐘</label><label><input type="radio" name="q5" value="skip" /> 直接跳到下一週</label><p class="question-feedback" data-question-feedback="q5" role="status" aria-live="polite"></p></fieldset>
               <div class="answer-row"><button class="button button-secondary" type="submit">檢查小測驗</button><span id="quizScore" class="quiz-score" role="status" aria-live="polite"></span></div>
               <p id="quizFeedback" class="feedback" role="status" aria-live="polite"></p>
             </form>
@@ -184,7 +192,7 @@ print("Zero to Independent")</code></pre>
               <div class="answer-row"><button class="button button-primary" type="submit">保存並完成 Day 1</button><span id="reflectionStatus" class="save-status" role="status"></span></div>
             </form>
             <div id="completionBanner" class="completion-banner" hidden>
-              <span class="completion-mark">✓</span><div><strong>Day 1 的互動課堂完成。</strong><p>這是可公開分享的 Day 1 互動示範；若要繼續完整課程，請查看 <a href="README.md">分享版說明</a>。</p></div>
+              <span class="completion-mark">✓</span><div><strong>Day 1 的互動課堂完成。</strong><p>下一步可以依照分享版說明，繼續你的學習路線。</p></div>
             </div>
             <div class="panel-actions panel-actions-split"><button class="button button-quiet" type="button" data-prev="quiz">← 回到小測驗</button><a class="button button-secondary" href="README.md">查看分享版說明</a></div>
           </section>

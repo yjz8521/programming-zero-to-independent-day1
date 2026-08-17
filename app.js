@@ -12,14 +12,21 @@
     q4: "show",
     q5: "try",
   };
+  const quizOptionLabels = {
+    q1: { file: "File", folder: "Folder / Directory", program: "Program" },
+    q2: { day01: "`day01.md`", py: "`py hello.py`", month: "`month01`" },
+    q3: { print: '`print("Hello")`', comment: '`# print("Hello")`', blank: "`print()`" },
+    q4: { show: "把內容顯示在 output", save: "把內容保存成 file", move: "把資料夾移動到別處" },
+    q5: { answer: "立刻要求完整答案", try: "先獨立分析與嘗試 20 分鐘", skip: "直接跳到下一週" },
+  };
 
   const defaultState = {
     current: "welcome",
     completed: {},
     classification: { selected: "", attempts: 0, passed: false },
     order: { attempts: 0, passed: false },
-    output: { attempts: 0, passed: false, answer: "" },
-    quiz: { score: null, passed: false },
+    output: { attempts: 0, passed: false, answer: "", answerRevealed: false },
+    quiz: { score: null, passed: false, answers: {} },
     reflection: { learned: "", confused: "", nextStep: "" },
   };
 
@@ -36,7 +43,11 @@
         classification: { ...defaultState.classification, ...(saved.classification || {}) },
         order: { ...defaultState.order, ...(saved.order || {}) },
         output: { ...defaultState.output, ...(saved.output || {}) },
-        quiz: { ...defaultState.quiz, ...(saved.quiz || {}) },
+        quiz: {
+          ...defaultState.quiz,
+          ...(saved.quiz || {}),
+          answers: { ...defaultState.quiz.answers, ...((saved.quiz || {}).answers || {}) },
+        },
         reflection: { ...defaultState.reflection, ...(saved.reflection || {}) },
       };
     } catch {
@@ -139,6 +150,13 @@
       select.value = state.order.values?.[index] || "";
     });
     $("#outputAnswer").value = state.output.answer || "";
+    $("#showOutputAnswer").hidden = !state.output.answerRevealed;
+    $("#outputAnswerReview").hidden = !state.output.answerRevealed;
+    $$("#quizForm input[type='radio']").forEach((input) => {
+      input.checked = state.quiz.answers?.[input.name] === input.value;
+    });
+    if (state.quiz.score !== null) $("#quizScore").textContent = `得分 ${state.quiz.score} / 5`;
+    renderQuizReview();
     $("#learned").value = state.reflection.learned || "";
     $("#confused").value = state.reflection.confused || "";
     $("#nextStep").value = state.reflection.nextStep || "";
@@ -201,10 +219,15 @@
     state.output.attempts += 1;
     if (normalizedOutput(answer) === expectedOutput) {
       state.output.passed = true;
+      state.output.answerRevealed = false;
+      $("#showOutputAnswer").hidden = true;
+      $("#outputAnswerReview").hidden = true;
       setFeedback("#outputFeedback", "正確。你保留了 `print()` 產生的空白行，也沒有把 comment 當成 output。", "success");
       maybeCompletePractice();
     } else {
-      setFeedback("#outputFeedback", "還不一致。逐行追蹤：每個 `print()` 會做什麼？中間那個沒有文字的呼叫會留下什麼？", "error");
+      state.output.passed = false;
+      $("#showOutputAnswer").hidden = false;
+      setFeedback("#outputFeedback", "還不一致。你目前填入的是 output 以外的內容，請檢查：comment 不會顯示、空白 `print()` 會留下空白行，而且 output 不會包含程式碼本身。", "error");
     }
     saveState();
   }
@@ -217,16 +240,65 @@
     }
   }
 
+  function showOutputAnswer() {
+    state.output.answerRevealed = true;
+    $("#outputAnswerReview").hidden = false;
+    $("#showOutputAnswer").hidden = false;
+    saveState("正確 output 已顯示");
+  }
+
+  function clearQuizReview() {
+    $$(".quiz-question").forEach((question) => {
+      question.classList.remove("is-correct", "is-wrong");
+      question.querySelectorAll("label").forEach((label) => {
+        label.classList.remove("is-correct-option", "is-wrong-option");
+      });
+      const feedback = $("[data-question-feedback]", question);
+      if (feedback) feedback.textContent = "";
+    });
+  }
+
+  function renderQuizReview() {
+    clearQuizReview();
+    if (state.quiz.score === null) return;
+    $$(".quiz-question").forEach((question) => {
+      const name = question.dataset.question;
+      const expected = quizAnswers[name];
+      const selected = state.quiz.answers?.[name] || "";
+      const feedback = $("[data-question-feedback]", question);
+      const labels = quizOptionLabels[name] || {};
+      question.querySelectorAll("label").forEach((label) => {
+        const input = $("input", label);
+        if (!input) return;
+        if (input.value === expected) label.classList.add("is-correct-option");
+        if (selected && input.value === selected && selected !== expected) label.classList.add("is-wrong-option");
+      });
+      if (selected === expected) {
+        question.classList.add("is-correct");
+        feedback.textContent = "✓ 正確";
+      } else if (selected) {
+        question.classList.add("is-wrong");
+        feedback.textContent = `✗ 你選的是：${labels[selected] || selected}；正確答案：${labels[expected] || expected}`;
+      } else {
+        question.classList.add("is-wrong");
+        feedback.textContent = `✗ 尚未作答；正確答案：${labels[expected] || expected}`;
+      }
+    });
+  }
+
   function checkQuiz(event) {
     event.preventDefault();
     let score = 0;
+    state.quiz.answers = {};
     Object.entries(quizAnswers).forEach(([name, answer]) => {
       const selected = $("input[name='" + name + "']:checked");
+      if (selected) state.quiz.answers[name] = selected.value;
       if (selected?.value === answer) score += 1;
     });
     state.quiz.score = score;
     state.quiz.passed = score >= 4;
     $("#quizScore").textContent = `得分 ${score} / 5`;
+    renderQuizReview();
     if (state.quiz.passed) {
       markComplete("quiz");
       setFeedback("#quizFeedback", "Checkpoint 通過。錯的題目也請回頭說明原因，不要只記分數。", "success");
@@ -294,7 +366,22 @@
     $("#orderHint").addEventListener("click", showOrderHint);
     $("#checkOutput").addEventListener("click", checkOutput);
     $("#outputHint").addEventListener("click", showOutputHint);
+    $("#showOutputAnswer").addEventListener("click", showOutputAnswer);
     $("#quizForm").addEventListener("submit", checkQuiz);
+    $$("#quizForm input[type='radio']").forEach((input) => {
+      input.addEventListener("change", () => {
+        state.quiz.answers[input.name] = input.value;
+        if (state.quiz.score !== null) {
+          state.quiz.score = null;
+          state.quiz.passed = false;
+          delete state.completed.quiz;
+          $("#quizScore").textContent = "";
+          clearQuizReview();
+          updateProgress();
+        }
+        saveState("小測驗答案已暫存");
+      });
+    });
     $("#reflectionForm").addEventListener("submit", saveReflection);
     $$("#reflectionForm textarea, #outputAnswer").forEach((field) => {
       field.addEventListener("input", () => {
