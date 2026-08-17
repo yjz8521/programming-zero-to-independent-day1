@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Programming Zero to Independent 的 Day 1 互動課堂" />
+    <link rel="icon" href="data:," />
+    <title>Zero to Independent · Day 1 互動課堂</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#welcome" aria-label="回到課堂首頁">
+          <span class="brand-mark">Z→I</span>
+          <span>
+            <strong>Zero to Independent</strong>
+            <small>互動程式設計課堂</small>
+          </span>
+        </a>
+        <div class="topbar-actions">
+          <span id="saveStatus" class="save-status" role="status">進度會保存在這台裝置</span>
+          <button id="resetProgress" class="button button-quiet" type="button">重設 Day 1</button>
+        </div>
+      </header>
+
+      <div class="classroom-layout">
+        <aside class="sidebar" aria-label="課堂導覽">
+          <div class="course-label">MONTH 1 · WEEK 1</div>
+          <h1>Day 1<br />先學會如何學習</h1>
+          <p class="sidebar-intro">你會用電腦、檔案與簡單指令建立第一個程式設計心智模型。</p>
+
+          <nav class="lesson-nav" aria-label="Day 1 課堂步驟">
+            <button class="nav-item is-active" type="button" data-step="welcome">
+              <span class="nav-number">01</span><span class="nav-copy"><strong>開始</strong><small>設定學習目標</small></span><span class="nav-check" aria-hidden="true">○</span>
+            </button>
+            <button class="nav-item" type="button" data-step="concepts">
+              <span class="nav-number">02</span><span class="nav-copy"><strong>核心名詞</strong><small>Program、File、Terminal</small></span><span class="nav-check" aria-hidden="true">○</span>
+            </button>
+            <button class="nav-item" type="button" data-step="practice">
+              <span class="nav-number">03</span><span class="nav-copy"><strong>動手回答</strong><small>分類、排序、預測</small></span><span class="nav-check" aria-hidden="true">○</span>
+            </button>
+            <button class="nav-item" type="button" data-step="quiz">
+              <span class="nav-number">04</span><span class="nav-copy"><strong>小測驗</strong><small>不用急著看答案</small></span><span class="nav-check" aria-hidden="true">○</span>
+            </button>
+            <button class="nav-item" type="button" data-step="reflection">
+              <span class="nav-number">05</span><span class="nav-copy"><strong>學習紀錄</strong><small>留下下一步</small></span><span class="nav-check" aria-hidden="true">○</span>
+            </button>
+          </nav>
+
+          <div class="progress-card" aria-label="Day 1 進度">
+            <div class="progress-heading"><span>Day 1 進度</span><strong id="progressText">0%</strong></div>
+            <div class="progress-track"><span id="progressFill"></span></div>
+            <p id="progressMessage">先完成開始頁，慢慢來。</p>
+          </div>
+
+          <div class="ai-card">
+            <span class="eyebrow">AI SAFETY</span>
+            <strong>先自己想 20 分鐘</strong>
+            <p>卡住時只拿 Level 1 方向。這個課堂不會一開始把完整答案丟給你。</p>
+          </div>
+        </aside>
+
+        <main class="main-content" id="mainContent">
+          <section class="lesson-panel is-visible" data-panel="welcome" id="welcome" tabindex="-1">
+            <div class="panel-kicker">DAY 1 / CONCEPT</div>
+            <div class="hero-grid">
+              <div>
+                <h2>今天不追求寫很多 Code，先建立正確的觀察方式。</h2>
+                <p class="lead">程式設計是把模糊的目標，拆成電腦能照順序執行、而且可以驗證的指令。今天你會先練習「說清楚、預測、再確認」。</p>
+                <button class="button button-primary" type="button" data-next="concepts">開始 Day 1 <span aria-hidden="true">→</span></button>
+              </div>
+              <div class="hero-note">
+                <span class="note-pin">今天的證據</span>
+                <p>你不需要證明自己很快。你要留下的是：</p>
+                <ul>
+                  <li>一個自己的分類理由</li>
+                  <li>一次先預測再檢查</li>
+                  <li>一個還不懂、但已經說清楚的問題</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="section-heading"><span class="eyebrow">LEARNING OBJECTIVES</span><h3>完成後，你應該可以……</h3></div>
+            <div class="objective-grid">
+              <article class="objective-card"><span class="objective-icon">01</span><h4>說明名詞</h4><p>用自己的話區分 Program、Code、File、Folder、Terminal。</p></article>
+              <article class="objective-card"><span class="objective-icon">02</span><h4>拆出步驟</h4><p>把「找到今天的教材」寫成另一個人可以照做的順序。</p></article>
+              <article class="objective-card"><span class="objective-icon">03</span><h4>留下證據</h4><p>先寫預期，再看實際結果；不把「好像可以」當成驗證。</p></article>
+            </div>
+
+            <div class="callout callout-warm"><strong>使用方式</strong><span>每個區塊都可以操作。回答錯了沒有關係，先看回饋，再自己重試。</span></div>
+          </section>
+
+          <section class="lesson-panel" data-panel="concepts" id="concepts" tabindex="-1" hidden>
+            <div class="panel-kicker">01 · CORE VOCABULARY</div>
+            <h2>先把「東西的角色」說清楚</h2>
+            <p class="lead">今天先不用背正式定義。先用生活中的比喻建立方向，再用小題目確認你是否真的分得出來。</p>
+
+            <div class="term-grid">
+              <article class="term-card"><div class="term-top"><span class="term-en">Program</span><span class="term-zh">程式</span></div><p>一組為了完成任務而安排好的指令。像是一份可以照做的工作流程。</p><div class="term-diff">不是單一行 code；Program 可以由很多段 code 組成。</div></article>
+              <article class="term-card"><div class="term-top"><span class="term-en">File</span><span class="term-zh">檔案</span></div><p>一份有名稱、可以保存內容的資料。`day01.md` 就是一個 file。</p><div class="term-diff">不是 folder；file 裡面放內容，folder 用來整理東西。</div></article>
+              <article class="term-card"><div class="term-top"><span class="term-en">Terminal</span><span class="term-zh">終端機</span></div><p>讓你用文字輸入指令、看見回覆的介面。</p><div class="term-diff">Terminal 是介面；Shell 是解讀指令的程式。</div></article>
+            </div>
+
+            <div class="interactive-card" data-widget="classification">
+              <div class="widget-heading"><span class="widget-number">A</span><div><span class="eyebrow">快速分類</span><h3>`day01.md` 最接近哪一個？</h3></div></div>
+              <p>先選一個，再說服自己：你是根據「它保存了什麼」還是「它在哪裡」來分類？</p>
+              <div class="choice-row" role="group" aria-label="day01.md 分類選項">
+                <button class="choice-button" type="button" data-classification="Program">Program</button>
+                <button class="choice-button" type="button" data-classification="File">File</button>
+                <button class="choice-button" type="button" data-classification="Folder">Folder / Directory</button>
+                <button class="choice-button" type="button" data-classification="Command">Command</button>
+              </div>
+              <div class="answer-row"><button id="checkClassification" class="button button-secondary" type="button">檢查我的回答</button><button id="classificationHint" class="text-button" type="button">我卡住了，給 Level 1 方向</button></div>
+              <p id="classificationFeedback" class="feedback" role="status" aria-live="polite"></p>
+            </div>
+
+            <div class="panel-actions"><button class="button button-primary" type="button" data-next="practice">進入動手回答 <span aria-hidden="true">→</span></button></div>
+          </section>
+
+          <section class="lesson-panel" data-panel="practice" id="practice" tabindex="-1" hidden>
+            <div class="panel-kicker">02 · PRACTICE LAB</div>
+            <h2>把想法變成可以檢查的答案</h2>
+            <p class="lead">程式設計的可靠感，不是來自猜對，而是來自「我知道我怎麼驗證」。下面三個小題會留下你的推理痕跡。</p>
+
+            <div class="interactive-card" data-widget="ordering">
+              <div class="widget-heading"><span class="widget-number">B</span><div><span class="eyebrow">步驟排序</span><h3>把「找到 Day 1 教材」排成可執行順序</h3></div></div>
+              <p class="muted">每個位置選一個步驟。不要用「我平常會這樣做」帶過，想像另一個完全不知道資料夾位置的人。</p>
+              <div class="order-list">
+                <label><span>Step 1</span><select class="step-select" data-position="0"><option value="">請選擇</option><option value="repo">開啟 Repository 根目錄</option><option value="month">進入 month01</option><option value="week">進入 week01</option><option value="day">開啟 day01.md</option></select></label>
+                <label><span>Step 2</span><select class="step-select" data-position="1"><option value="">請選擇</option><option value="repo">開啟 Repository 根目錄</option><option value="month">進入 month01</option><option value="week">進入 week01</option><option value="day">開啟 day01.md</option></select></label>
+                <label><span>Step 3</span><select class="step-select" data-position="2"><option value="">請選擇</option><option value="repo">開啟 Repository 根目錄</option><option value="month">進入 month01</option><option value="week">進入 week01</option><option value="day">開啟 day01.md</option></select></label>
+                <label><span>Step 4</span><select class="step-select" data-position="3"><option value="">請選擇</option><option value="repo">開啟 Repository 根目錄</option><option value="month">進入 month01</option><option value="week">進入 week01</option><option value="day">開啟 day01.md</option></select></label>
+              </div>
+              <div class="answer-row"><button id="checkOrder" class="button button-secondary" type="button">檢查步驟</button><button id="orderHint" class="text-button" type="button">Level 1 方向</button></div>
+              <p id="orderFeedback" class="feedback" role="status" aria-live="polite"></p>
+            </div>
+
+            <div class="interactive-card" data-widget="output">
+              <div class="widget-heading"><span class="widget-number">C</span><div><span class="eyebrow">Output Prediction</span><h3>不執行，先寫出你預期的畫面</h3></div></div>
+              <pre class="code-sample"><code>print("Python")
+print()
+# 這一行不產生 output
+print("Zero to Independent")</code></pre>
+              <label class="field-label" for="outputAnswer">你的預期 output（保留中間的空白行）</label>
+              <textarea id="outputAnswer" rows="5" spellcheck="false" placeholder="在這裡先寫預期結果……"></textarea>
+              <div class="answer-row"><button id="checkOutput" class="button button-secondary" type="button">檢查 output</button><button id="outputHint" class="text-button" type="button">Level 1 方向</button></div>
+              <p id="outputFeedback" class="feedback" role="status" aria-live="polite"></p>
+            </div>
+
+            <div class="callout callout-cool"><strong>小提醒</strong><span>如果你需要按很多次「檢查」，那不是失敗；請觀察每次回饋，記下你改變了什麼。</span></div>
+            <div class="panel-actions"><button class="button button-primary" type="button" data-next="quiz">進入小測驗 <span aria-hidden="true">→</span></button></div>
+          </section>
+
+          <section class="lesson-panel" data-panel="quiz" id="quiz" tabindex="-1" hidden>
+            <div class="panel-kicker">03 · CHECKPOINT</div>
+            <h2>小測驗：把今天的能力帶走</h2>
+            <p class="lead">這不是正式週考。請先自己作答，再按檢查；分數只是訊號，錯題才是下一個學習方向。</p>
+
+            <form id="quizForm" class="quiz-form">
+              <fieldset class="quiz-question"><legend>1. `month01` 最接近哪一種東西？</legend><label><input type="radio" name="q1" value="file" /> File</label><label><input type="radio" name="q1" value="folder" /> Folder / Directory</label><label><input type="radio" name="q1" value="program" /> Program</label></fieldset>
+              <fieldset class="quiz-question"><legend>2. 哪一個是交給 Shell 的 command？</legend><label><input type="radio" name="q2" value="day01" /> `day01.md`</label><label><input type="radio" name="q2" value="py" /> `py hello.py`</label><label><input type="radio" name="q2" value="month" /> `month01`</label></fieldset>
+              <fieldset class="quiz-question"><legend>3. 下列哪一行不會產生一般 output？</legend><label><input type="radio" name="q3" value="print" /> `print("Hello")`</label><label><input type="radio" name="q3" value="comment" /> `# print("Hello")`</label><label><input type="radio" name="q3" value="blank" /> `print()`</label></fieldset>
+              <fieldset class="quiz-question"><legend>4. `print()` 最接近什麼行為？</legend><label><input type="radio" name="q4" value="show" /> 把內容顯示在 output</label><label><input type="radio" name="q4" value="save" /> 把內容保存成 file</label><label><input type="radio" name="q4" value="move" /> 把資料夾移動到別處</label></fieldset>
+              <fieldset class="quiz-question"><legend>5. 遇到不懂的題目，預設先做什麼？</legend><label><input type="radio" name="q5" value="answer" /> 立刻要求完整答案</label><label><input type="radio" name="q5" value="try" /> 先獨立分析與嘗試 20 分鐘</label><label><input type="radio" name="q5" value="skip" /> 直接跳到下一週</label></fieldset>
+              <div class="answer-row"><button class="button button-secondary" type="submit">檢查小測驗</button><span id="quizScore" class="quiz-score" role="status" aria-live="polite"></span></div>
+              <p id="quizFeedback" class="feedback" role="status" aria-live="polite"></p>
+            </form>
+            <div class="panel-actions"><button class="button button-primary" type="button" data-next="reflection">進入學習紀錄 <span aria-hidden="true">→</span></button></div>
+          </section>
+
+          <section class="lesson-panel" data-panel="reflection" id="reflection" tabindex="-1" hidden>
+            <div class="panel-kicker">04 · REFLECTION</div>
+            <h2>把今天的理解留下來</h2>
+            <p class="lead">真正的進步需要證據。用自己的話完成三個句子；內容會只保存在這台裝置的瀏覽器。</p>
+            <form id="reflectionForm" class="reflection-form">
+              <label class="field-label" for="learned">今天我已經能說明…… <span>至少一句</span></label>
+              <textarea id="learned" rows="3" placeholder="例如：File 保存內容，Folder 用來整理 File。"></textarea>
+              <label class="field-label" for="confused">我仍然不確定…… <span>不知道也可以誠實寫下來</span></label>
+              <textarea id="confused" rows="3" placeholder="例如：我還分不清 Terminal 和 Shell。"></textarea>
+              <label class="field-label" for="nextStep">下一次開始前，我會…… <span>寫一個具體動作</span></label>
+              <textarea id="nextStep" rows="3" placeholder="例如：先讀 Week 1 Day 2 的 Prerequisites，再驗證 Python 版本。"></textarea>
+              <div class="answer-row"><button class="button button-primary" type="submit">保存並完成 Day 1</button><span id="reflectionStatus" class="save-status" role="status"></span></div>
+            </form>
+            <div id="completionBanner" class="completion-banner" hidden>
+              <span class="completion-mark">✓</span><div><strong>Day 1 的互動課堂完成。</strong><p>這是可公開分享的 Day 1 互動示範；若要繼續完整課程，請查看 <a href="README.md">分享版說明</a>。</p></div>
+            </div>
+            <div class="panel-actions panel-actions-split"><button class="button button-quiet" type="button" data-prev="quiz">← 回到小測驗</button><a class="button button-secondary" href="README.md">查看分享版說明</a></div>
+          </section>
+        </main>
+      </div>
+
+      <footer class="site-footer"><span>Programming Zero to Independent</span><span>學習用途 · 不提供投資建議 · 人工確認</span></footer>
+    </div>
+  </body>
+</html>
