@@ -79,7 +79,7 @@
   function updateProgress() {
     const completed = steps.filter((step) => state.completed[step]).length;
     const percentage = Math.round((completed / steps.length) * 100);
-    $("#progressFill").style.width = `${percentage}%`;
+    $("#progressFill").style.setProperty("--progress-scale", String(percentage / 100));
     $("#progressText").textContent = `${percentage}%`;
     const messages = [
       "先完成開始頁，慢慢來。",
