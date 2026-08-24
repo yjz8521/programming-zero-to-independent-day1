@@ -146,7 +146,7 @@ a { color: inherit; }
 .panel-kicker, .eyebrow { display: none; }
 
 h2, h3, h4 { font-family: "Noto Serif TC", Georgia, "Times New Roman", serif; }
-h2 { color: var(--ink-deep); font-size: clamp(35px, 4.25vw, 54px); letter-spacing: -0.055em; line-height: 1.13; margin: 0; max-width: 780px; }
+h2 { color: var(--ink-deep); font-size: clamp(35px, 3.75vw, 50px); letter-spacing: -0.055em; line-height: 1.13; margin: 0; max-width: 780px; }
 h3 { color: var(--ink-deep); font-size: 24px; letter-spacing: -0.035em; line-height: 1.35; margin: 5px 0 0; }
 h4 { font-size: 17px; line-height: 1.4; margin: 0 0 7px; }
 p { margin-top: 0; }
