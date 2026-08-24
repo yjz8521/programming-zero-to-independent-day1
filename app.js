@@ -60,6 +60,17 @@
   const $ = (selector, parent = document) => parent.querySelector(selector);
   const $$ = (selector, parent = document) => [...parent.querySelectorAll(selector)];
 
+  function renderInlineCode(value) {
+    const escaped = String(value).replace(/[&<>"']/g, (character) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;",
+    })[character]);
+    return escaped.replace(/`([^`]+)`/g, "<code>$1</code>");
+  }
+
   function saveState(message = "進度已保存於這台裝置") {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
@@ -118,7 +129,7 @@
 
   function setFeedback(selector, message, kind = "info") {
     const element = $(selector);
-    element.textContent = message;
+    element.innerHTML = renderInlineCode(message);
     element.className = `feedback is-visible is-${kind}`;
   }
 
@@ -278,10 +289,10 @@
         feedback.textContent = "✓ 正確";
       } else if (selected) {
         question.classList.add("is-wrong");
-        feedback.textContent = `✗ 你選的是：${labels[selected] || selected}；正確答案：${labels[expected] || expected}`;
+        feedback.innerHTML = renderInlineCode(`✗ 你選的是：${labels[selected] || selected}；正確答案：${labels[expected] || expected}`);
       } else {
         question.classList.add("is-wrong");
-        feedback.textContent = `✗ 尚未作答；正確答案：${labels[expected] || expected}`;
+        feedback.innerHTML = renderInlineCode(`✗ 尚未作答；正確答案：${labels[expected] || expected}`);
       }
     });
   }

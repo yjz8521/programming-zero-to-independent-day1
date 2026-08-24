@@ -6,8 +6,8 @@
     <meta name="description" content="Programming Zero to Independent 的 Day 1 互動課堂" />
     <link rel="icon" href="data:," />
     <title>Zero to Independent · Day 1 互動課堂</title>
-    <link rel="stylesheet" href="styles.css?v=redesign-2" />
-    <script src="app.js?v=redesign-2" defer></script>
+    <link rel="stylesheet" href="styles.css?v=redesign-3" />
+    <script src="app.js?v=redesign-3" defer></script>
   </head>
   <body>
     <!--
@@ -107,12 +107,12 @@
 
             <div class="term-grid">
               <article class="term-card"><div class="term-top"><span class="term-en">Program</span><span class="term-zh">程式</span></div><p>一組為了完成任務而安排好的指令。像是一份可以照做的工作流程。</p><div class="term-diff">不是單一行 code；Program 可以由很多段 code 組成。</div></article>
-              <article class="term-card"><div class="term-top"><span class="term-en">File</span><span class="term-zh">檔案</span></div><p>一份有名稱、可以保存內容的資料。`day01.md` 就是一個 file。</p><div class="term-diff">不是 folder；file 裡面放內容，folder 用來整理東西。</div></article>
+              <article class="term-card"><div class="term-top"><span class="term-en">File</span><span class="term-zh">檔案</span></div><p>一份有名稱、可以保存內容的資料。<code>day01.md</code> 就是一個 file。</p><div class="term-diff">不是 folder；file 裡面放內容，folder 用來整理東西。</div></article>
               <article class="term-card"><div class="term-top"><span class="term-en">Terminal</span><span class="term-zh">終端機</span></div><p>讓你用文字輸入指令、看見回覆的介面。</p><div class="term-diff">Terminal 是介面；Shell 是解讀指令的程式。</div></article>
             </div>
 
             <div class="interactive-card" data-widget="classification">
-              <div class="widget-heading"><span class="widget-number">A</span><div><span class="eyebrow">快速分類</span><h3>`day01.md` 最接近哪一個？</h3></div></div>
+              <div class="widget-heading"><span class="widget-number">A</span><div><span class="eyebrow">快速分類</span><h3><code>day01.md</code> 最接近哪一個？</h3></div></div>
               <p>先選一個，再說服自己：你是根據「它保存了什麼」還是「它在哪裡」來分類？</p>
               <div class="choice-row" role="group" aria-label="day01.md 分類選項">
                 <button class="choice-button" type="button" data-classification="Program">Program</button>
@@ -175,10 +175,10 @@ Zero to Independent</pre>
             <p class="lead">這不是正式週考。請先自己作答，再按檢查；分數只是訊號，錯題才是下一個學習方向。</p>
 
             <form id="quizForm" class="quiz-form">
-              <fieldset class="quiz-question" data-question="q1"><legend>1. `month01` 最接近哪一種東西？</legend><label><input type="radio" name="q1" value="file" /> File</label><label><input type="radio" name="q1" value="folder" /> Folder / Directory</label><label><input type="radio" name="q1" value="program" /> Program</label><p class="question-feedback" data-question-feedback="q1" role="status" aria-live="polite"></p></fieldset>
-              <fieldset class="quiz-question" data-question="q2"><legend>2. 哪一個是交給 Shell 的 command？</legend><label><input type="radio" name="q2" value="day01" /> `day01.md`</label><label><input type="radio" name="q2" value="py" /> `py hello.py`</label><label><input type="radio" name="q2" value="month" /> `month01`</label><p class="question-feedback" data-question-feedback="q2" role="status" aria-live="polite"></p></fieldset>
-              <fieldset class="quiz-question" data-question="q3"><legend>3. 下列哪一行不會產生一般 output？</legend><label><input type="radio" name="q3" value="print" /> `print("Hello")`</label><label><input type="radio" name="q3" value="comment" /> `# print("Hello")`</label><label><input type="radio" name="q3" value="blank" /> `print()`</label><p class="question-feedback" data-question-feedback="q3" role="status" aria-live="polite"></p></fieldset>
-              <fieldset class="quiz-question" data-question="q4"><legend>4. `print()` 最接近什麼行為？</legend><label><input type="radio" name="q4" value="show" /> 把內容顯示在 output</label><label><input type="radio" name="q4" value="save" /> 把內容保存成 file</label><label><input type="radio" name="q4" value="move" /> 把資料夾移動到別處</label><p class="question-feedback" data-question-feedback="q4" role="status" aria-live="polite"></p></fieldset>
+              <fieldset class="quiz-question" data-question="q1"><legend>1. <code>month01</code> 最接近哪一種東西？</legend><label><input type="radio" name="q1" value="file" /> File</label><label><input type="radio" name="q1" value="folder" /> Folder / Directory</label><label><input type="radio" name="q1" value="program" /> Program</label><p class="question-feedback" data-question-feedback="q1" role="status" aria-live="polite"></p></fieldset>
+              <fieldset class="quiz-question" data-question="q2"><legend>2. 哪一個是交給 Shell 的 command？</legend><label><input type="radio" name="q2" value="day01" /> <code>day01.md</code></label><label><input type="radio" name="q2" value="py" /> <code>py hello.py</code></label><label><input type="radio" name="q2" value="month" /> <code>month01</code></label><p class="question-feedback" data-question-feedback="q2" role="status" aria-live="polite"></p></fieldset>
+              <fieldset class="quiz-question" data-question="q3"><legend>3. 下列哪一行不會產生一般 output？</legend><label><input type="radio" name="q3" value="print" /> <code>print("Hello")</code></label><label><input type="radio" name="q3" value="comment" /> <code># print("Hello")</code></label><label><input type="radio" name="q3" value="blank" /> <code>print()</code></label><p class="question-feedback" data-question-feedback="q3" role="status" aria-live="polite"></p></fieldset>
+              <fieldset class="quiz-question" data-question="q4"><legend>4. <code>print()</code> 最接近什麼行為？</legend><label><input type="radio" name="q4" value="show" /> 把內容顯示在 output</label><label><input type="radio" name="q4" value="save" /> 把內容保存成 file</label><label><input type="radio" name="q4" value="move" /> 把資料夾移動到別處</label><p class="question-feedback" data-question-feedback="q4" role="status" aria-live="polite"></p></fieldset>
               <fieldset class="quiz-question" data-question="q5"><legend>5. 遇到不懂的題目，預設先做什麼？</legend><label><input type="radio" name="q5" value="answer" /> 立刻要求完整答案</label><label><input type="radio" name="q5" value="try" /> 先獨立分析與嘗試 20 分鐘</label><label><input type="radio" name="q5" value="skip" /> 直接跳到下一週</label><p class="question-feedback" data-question-feedback="q5" role="status" aria-live="polite"></p></fieldset>
               <div class="answer-row"><button class="button button-secondary" type="submit">檢查小測驗</button><span id="quizScore" class="quiz-score" role="status" aria-live="polite"></span></div>
               <p id="quizFeedback" class="feedback" role="status" aria-live="polite"></p>
