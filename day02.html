@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Zero to Independent · Day 2</title>
+    <link rel="stylesheet" href="styles.css?v=redesign-4" />
+  </head>
+  <body class="reader-page">
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="index.html#welcome" aria-label="回到 Day 1 互動課堂">
+          <span class="brand-mark" aria-hidden="true">Z→I</span>
+          <span><strong>Zero to Independent</strong><small>互動程式設計課堂</small></span>
+        </a>
+        <div class="topbar-actions"><span class="save-status">Day 1 已完成</span><a class="button button-quiet" href="index.html#welcome">回到 Day 1</a></div>
+      </header>
+
+      <main class="reader-main">
+        <article class="reader-sheet">
+          <div class="reader-heading">
+            <div>
+              <p class="course-label">MONTH 1 · WEEK 1 · DAY 02</p>
+              <h1 class="reader-title">Python 執行環境、Interpreter、REPL 與 Script</h1>
+              <p class="lead">今天的成功標準不是寫出功能，而是能說清楚「程式碼由誰執行」，並知道 REPL 與 Script 各自適合什麼情境。</p>
+            </div>
+            <aside class="hero-note"><span class="note-pin">今天的學習證據</span><p>完成後，你應該能：</p><ul><li>確認 Python 是否真的可用</li><li>分辨 REPL 與 Script</li><li>保存環境問題的證據</li></ul></aside>
+          </div>
+
+          <div class="callout callout-warm"><strong>20-Minute Rule</strong><span>先獨立嘗試 20 分鐘；需要 AI 時，預設只要求 Level 1 方向。環境問題不是能力失敗，先保存錯誤畫面。</span></div>
+
+          <section class="reader-section">
+            <div class="section-heading"><h2>今天先建立三個位置</h2></div>
+            <div class="reader-grid">
+              <article class="reader-card"><h3>Learning Objectives</h3><ul><li>說明 Python language 與 interpreter 的差別。</li><li>區分 REPL 與 script。</li><li>用版本命令確認環境。</li></ul></article>
+              <article class="reader-card"><h3>Prerequisites</h3><ul><li>已完成 Day 1 的 File、Folder、Program、Terminal。</li><li>能在檔案總管找到 repository。</li><li>今天不要求先會 Python 語法。</li></ul></article>
+              <article class="reader-card"><h3>New Terminology</h3><p><code>Programming Language</code>、<code>Source Code</code>、<code>Interpreter</code>、<code>Compiler</code>、<code>Environment</code>、<code>REPL</code>、<code>Script</code>。</p></article>
+            </div>
+          </section>
+
+          <section class="reader-section">
+            <div class="section-heading"><h2>先看懂執行流程</h2></div>
+            <div class="reader-flow" aria-label="Source Code 到執行結果的流程"><code>Source Code</code><span aria-hidden="true">→</span><code>Python Interpreter</code><span aria-hidden="true">→</span><code>執行結果</code></div>
+            <p class="muted">你寫下的文字不是硬體直接理解的指令；interpreter 會依 Python 的規則讀取、執行，最後產生結果或錯誤證據。</p>
+          </section>
+
+          <section class="reader-section">
+            <div class="section-heading"><h2>今天第一次操作</h2></div>
+            <ol class="reader-steps"><li>開啟 PowerShell。</li><li>輸入 <code>python --version</code>；若無法確認，再試 <code>py --version</code>。</li><li>成功後輸入 <code>python</code> 或 <code>py</code>，觀察 <code>&gt;&gt;&gt;</code>。</li><li>輸入 <code>exit()</code>，確認回到 PowerShell。</li></ol>
+            <div class="callout callout-cool"><strong>看見失敗時</strong><span>不要猜安裝方式，也不要亂試陌生命令；保留完整錯誤文字，依正式教材的 Windows Python 附錄排查。</span></div>
+          </section>
+
+          <div class="reader-actions"><a class="button button-primary" href="README.md">查看分享版說明</a><a class="button button-quiet" href="index.html#welcome">回到 Day 1</a></div>
+          <p class="reader-footnote">這是分享版的 Day 2 入口摘要；完整教材、練習與官方參考仍以完整 repository 內的 Markdown 檔為準。</p>
+        </article>
+      </main>
+
+      <footer class="site-footer"><span>Programming Zero to Independent</span><span>學習用途 · 不提供投資建議 · 人工確認</span></footer>
+    </div>
+  </body>
+</html>

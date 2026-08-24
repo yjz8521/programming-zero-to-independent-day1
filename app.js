@@ -56,6 +56,8 @@
   }
 
   let state = loadState();
+  let autoNextTimer = null;
+  let autoNextCountdownTimer = null;
 
   const $ = (selector, parent = document) => parent.querySelector(selector);
   const $$ = (selector, parent = document) => [...parent.querySelectorAll(selector)];
@@ -131,6 +133,42 @@
     const element = $(selector);
     element.innerHTML = renderInlineCode(message);
     element.className = `feedback is-visible is-${kind}`;
+  }
+
+  function cancelAutoNext(message = "已留在 Day 1；需要時可以點擊 Day 2。") {
+    window.clearTimeout(autoNextTimer);
+    window.clearInterval(autoNextCountdownTimer);
+    autoNextTimer = null;
+    autoNextCountdownTimer = null;
+    const nextLessonMessage = $("#nextLessonMessage");
+    const cancelButton = $("#cancelAutoNext");
+    if (nextLessonMessage) nextLessonMessage.textContent = message;
+    if (cancelButton) cancelButton.hidden = true;
+  }
+
+  function scheduleNextLesson() {
+    const completionBanner = $("#completionBanner");
+    const target = completionBanner?.dataset.autoNext;
+    const nextLessonMessage = $("#nextLessonMessage");
+    if (!target || !nextLessonMessage) return;
+    cancelAutoNext();
+    let remaining = 5;
+    const cancelButton = $("#cancelAutoNext");
+    if (cancelButton) cancelButton.hidden = false;
+    nextLessonMessage.textContent = `${remaining} 秒後自動開啟。`;
+    autoNextCountdownTimer = window.setInterval(() => {
+      remaining -= 1;
+      if (remaining > 0) nextLessonMessage.textContent = `${remaining} 秒後自動開啟。`;
+    }, 1000);
+    autoNextTimer = window.setTimeout(() => {
+      window.clearInterval(autoNextCountdownTimer);
+      window.location.assign(target);
+      window.setTimeout(() => {
+        if (window.location.href.includes("#reflection")) {
+          nextLessonMessage.textContent = "瀏覽器沒有自動開啟 Day 2，請點擊上方的 Day 2 連結。";
+        }
+      }, 600);
+    }, 5000);
   }
 
   function clearFeedback(selector) {
@@ -335,6 +373,7 @@
     $("#reflectionStatus").textContent = "反思已保存";
     if (steps.every((step) => state.completed[step])) {
       $("#completionBanner").hidden = false;
+      scheduleNextLesson();
     } else {
       $("#completionBanner").hidden = true;
       $("#reflectionStatus").textContent = "反思已保存；請完成前面尚未通過的 checkpoint。";
@@ -406,6 +445,7 @@
       localStorage.removeItem(STORAGE_KEY);
       window.location.reload();
     });
+    $("#cancelAutoNext")?.addEventListener("click", () => cancelAutoNext());
   }
 
   function init() {
@@ -414,7 +454,10 @@
     restoreInputs();
     updateProgress();
     showPanel(window.location.hash.slice(1) || state.current, false);
-    if (steps.every((step) => state.completed[step])) $("#completionBanner").hidden = false;
+    if (steps.every((step) => state.completed[step])) {
+      $("#completionBanner").hidden = false;
+      if (state.current === "reflection") scheduleNextLesson();
+    }
   }
 
   init();
