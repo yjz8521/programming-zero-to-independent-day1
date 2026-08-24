@@ -146,12 +146,12 @@ a { color: inherit; }
 .panel-kicker, .eyebrow { display: none; }
 
 h2, h3, h4 { font-family: "Noto Serif TC", Georgia, "Times New Roman", serif; }
-h2 { color: var(--ink-deep); font-size: clamp(35px, 5vw, 62px); letter-spacing: -0.055em; line-height: 1.13; margin: 0; max-width: 780px; }
+h2 { color: var(--ink-deep); font-size: clamp(35px, 4.25vw, 54px); letter-spacing: -0.055em; line-height: 1.13; margin: 0; max-width: 780px; }
 h3 { color: var(--ink-deep); font-size: 24px; letter-spacing: -0.035em; line-height: 1.35; margin: 5px 0 0; }
 h4 { font-size: 17px; line-height: 1.4; margin: 0 0 7px; }
 p { margin-top: 0; }
 .lead { color: var(--ink-soft); font-size: 16px; line-height: 1.9; margin: 20px 0 30px; max-width: 67ch; }
-.hero-grid { align-items: start; display: grid; gap: clamp(28px, 5vw, 68px); grid-template-columns: minmax(0, 1.25fr) minmax(235px, 0.75fr); }
+.hero-grid { align-items: start; display: grid; gap: clamp(28px, 5vw, 68px); grid-template-columns: minmax(0, 1.4fr) minmax(235px, 0.6fr); }
 .hero-grid > div:first-child { border-top: 2px solid var(--coral); padding-top: 22px; }
 .hero-note { background: var(--sage-soft); border: 1px solid #aac9be; border-radius: 4px; box-shadow: var(--shadow-small); padding: 24px; position: relative; }
 .hero-note::after { border: 1px solid rgba(198, 150, 73, 0.5); content: ""; inset: 8px; pointer-events: none; position: absolute; }
